@@ -1,5 +1,11 @@
+import Navigation from './Navigation';
+
 function Header() {
-    return <header className="p-4 bg-blue-500 text-white text-center">My Application Header</header>;
+    return (
+        <header className="header-container">            
+            <Navigation />
+        </header>
+    );
 }
 
 export default Header;
