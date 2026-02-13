@@ -10,8 +10,6 @@ function LoginPage() {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    // 백엔드 SecurityConfig(authorizationEndpoint)에서 설정한 구글 로그인 진입점 URL
-    // 리액트에서 이 주소로 이동하면 -> 백엔드가 구글 로그인 창으로 리다이렉트
     const GOOGLE_LOGIN_URL = "http://localhost:8080/api/auth/login/google";
 
     const handleChange = (e) => {
@@ -41,22 +39,32 @@ function LoginPage() {
     };
 
     return (
-        <main className="flex items-center justify-center py-12 px-4">
-            <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-                <h1 className="text-3xl font-bold text-center mb-6">로그인</h1>
-                <form onSubmit={handleLogin} className="space-y-4 mb-6">
+        <main className="min-h-[calc(100vh-200px)] flex items-center justify-center py-12 px-4">
+            <div className="w-full max-w-md bg-white rounded-3xl shadow-xl shadow-blue-900/10 border border-gray-100 p-8 sm:p-10">
+                <div className="text-center mb-10">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/30 mb-4">
+                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                        </svg>
+                    </div>
+                    <h1 className="text-3xl font-extrabold text-gray-900">로그인</h1>
+                    <p className="mt-2 text-sm text-gray-500">서비스 이용을 위해 계정에 로그인해주세요.</p>
+                </div>
+
+                <form onSubmit={handleLogin} className="space-y-6">
                     <div>
                         <label 
                             htmlFor="login-username" 
-                            className="block text-gray-700 text-sm font-bold mb-2"
+                            className="block text-sm font-semibold text-gray-700 mb-2 ml-1"
                         >
-                            아이디:
+                            아이디
                         </label>
                         <input
                             type="text"
                             id="login-username"
                             name="username"
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-gray-900 placeholder-gray-400"
+                            placeholder="아이디를 입력하세요"
                             value={formData.username}
                             onChange={handleChange}
                             required
@@ -65,47 +73,45 @@ function LoginPage() {
                     <div>
                         <label 
                             htmlFor="login-password" 
-                            className="block text-gray-700 text-sm font-bold mb-2"
+                            className="block text-sm font-semibold text-gray-700 mb-2 ml-1"
                         >
-                            비밀번호:
+                            비밀번호
                         </label>
                         <input
                             type="password"
                             id="login-password"
                             name="password"
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-gray-900 placeholder-gray-400"
+                            placeholder="비밀번호를 입력하세요"
                             value={formData.password}
                             onChange={handleChange}
                             required
                         />
                     </div>
+                    
                     <button 
                         type="submit" 
-                        className="w-full py-3 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600"
+                        className="w-full py-3.5 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 hover:from-blue-700 hover:to-indigo-700 transform transition hover:-translate-y-0.5 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                     >
                         로그인
                     </button>
                 </form>
 
-                {/* 구분선 (Divider) */}
-                <div className="relative mb-6">
+                <div className="relative my-8">
                     <div className="absolute inset-0 flex items-center">
-                        <div className="w-full border-t border-gray-300"></div>
+                        <div className="w-full border-t border-gray-200"></div>
                     </div>
                     <div className="relative flex justify-center text-sm">
-                        <span className="px-2 bg-white text-gray-500">또는</span>
+                        <span className="px-4 bg-white text-gray-500 font-medium">또는</span>
                     </div>
                 </div>
 
-                {/* 구글 로그인 버튼 */}
                 <div>
-                    {/* a 태그를 사용 백엔드 엔드포인트로 이동 */}
-                    <a href={GOOGLE_LOGIN_URL} className="block w-full">
+                    <a href={GOOGLE_LOGIN_URL} className="block w-full no-underline">
                         <button
                             type="button"
-                            className="w-full py-3 px-4 flex justify-center items-center gap-2 border border-gray-300 rounded-lg bg-white text-gray-700 font-medium hover:bg-gray-50"
+                            className="w-full py-3 px-4 flex justify-center items-center gap-3 border border-gray-200 rounded-xl bg-white text-gray-700 font-bold hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm"
                         >
-                            {/* 구글 G 로고 SVG */}
                             <svg className="w-5 h-5" viewBox="0 0 24 24">
                                 <path
                                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -124,13 +130,16 @@ function LoginPage() {
                                     fill="#EA4335"
                                 />
                             </svg>
-                            Google 계정으로 로그인
+                            Google 계정으로 계속하기
                         </button>
                     </a>
                 </div>
 
                 {error && (
-                    <div className="mt-4 p-4 rounded-md text-center bg-red-100 text-red-700" role="alert">
+                    <div className="mt-6 p-4 rounded-xl bg-red-50 text-red-600 text-sm font-medium text-center border border-red-100 flex items-center justify-center gap-2 animate-pulse" role="alert">
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
                         {error}
                     </div>
                 )}

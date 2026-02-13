@@ -39,81 +39,112 @@ function ArticleCreatePage() {
     };
 
     return (
-        <main className="p-6 max-w-3xl mx-auto">
-            <div className="flex justify-between items-center mb-8 pb-4 border-b border-gray-200">
-                <h1 className="text-2xl font-bold text-gray-800">새 게시글 작성</h1>
-                <button 
-                    onClick={() => navigate(-1)} 
-                    className="text-sm px-4 py-2 bg-gray-100 text-gray-600 font-medium rounded-lg hover:bg-gray-200 transition-colors"
-                >
-                    작성 취소(뒤로가기)
-                </button>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-md border border-gray-100">
-                <form onSubmit={handleCreateArticle} className="space-y-6">
-                    <div>
-                        <label className="block text-gray-700 text-sm font-bold mb-2">
-                            제목:
-                        </label>
-                        <input 
-                            type="text" 
-                            name="title" 
-                            value={formData.title}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" 
-                            placeholder="제목을 입력하세요" 
-                            required 
-                        />
+        <div className="min-h-screen py-4 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto space-y-6">
+                                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div className="space-y-1">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-100 text-indigo-800">
+                            New Post
+                        </span>
+                        <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+                            게시글 작성
+                        </h1>
                     </div>
-
-                    <div>
-                        <label className="block text-gray-700 text-sm font-bold mb-2">
-                            내용:
-                        </label>
-                        <textarea 
-                            name="contents" 
-                            value={formData.contents}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" 
-                            rows="12" 
-                            placeholder="내용을 상세히 입력하세요" 
-                            required
-                        />
-                    </div>
-
-                    <div>
-                        <label className="block text-gray-700 text-sm font-bold mb-2">
-                            첨부 파일:
-                        </label>
-                        <input 
-                            type="file" 
-                            name="file" 
-                            onChange={handleChange}
-                            className="w-full text-sm text-gray-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all cursor-pointer" 
-                        />
-                    </div>
-
                     <button 
-                        type="submit" 
-                        className="w-full py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-all shadow-lg active:scale-[0.98]"
+                        onClick={() => navigate(-1)} 
+                        className="group flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-xl text-gray-600 text-sm font-medium hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm"
                     >
-                        게시글 등록하기
+                        <svg className="w-4 h-4 text-gray-400 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        돌아가기
                     </button>
-                </form>
+                </div>
 
-                {message && (
-                    <div 
-                        className={`mt-6 p-4 rounded-md text-center text-sm font-medium ${
-                            isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'
-                        }`} 
-                        role="alert"
-                    >
-                        {message}
-                    </div>
-                )}
+                <div className="bg-white rounded-3xl shadow-xl shadow-blue-900/5 overflow-hidden border border-gray-100">
+                    <form onSubmit={handleCreateArticle} className="p-8 sm:p-10 space-y-8">
+                        
+                        <div className="space-y-2">
+                            <label className="block text-sm font-bold text-gray-700 ml-1">
+                                제목
+                            </label>
+                            <input 
+                                type="text" 
+                                name="title" 
+                                value={formData.title}
+                                onChange={handleChange}
+                                className="w-full px-5 py-4 text-lg font-medium bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder-gray-400" 
+                                placeholder="제목을 입력해 주세요" 
+                                required 
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="block text-sm font-bold text-gray-700 ml-1">
+                                내용
+                            </label>
+                            <textarea 
+                                name="contents" 
+                                value={formData.contents}
+                                onChange={handleChange}
+                                className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder-gray-400 min-h-[300px] resize-y" 
+                                placeholder="내용을 자유롭게 작성해 주세요..." 
+                                required
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="block text-sm font-bold text-gray-700 ml-1">
+                                첨부 파일
+                            </label>
+                            <div className="relative group">
+                                <div className="absolute inset-0 bg-blue-50 rounded-xl opacity-0 group-hover:opacity-50 transition-opacity pointer-events-none"></div>
+                                <input 
+                                    type="file" 
+                                    name="file" 
+                                    onChange={handleChange}
+                                    className="block w-full text-sm text-gray-500 file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200 file:transition-colors file:cursor-pointer p-2 border border-gray-200 rounded-xl bg-white cursor-pointer" 
+                                />
+                            </div>
+                            <p className="text-xs text-gray-400 ml-1">
+                                * 이미지 파일(jpg, png 등)을 업로드할 수 있습니다.
+                            </p>
+                        </div>
+
+                        <div className="border-t border-gray-100 my-6"></div>
+
+                        <button 
+                            type="submit" 
+                            className="w-full py-4 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-lg font-bold rounded-xl shadow-lg shadow-blue-500/30 hover:from-blue-700 hover:to-indigo-700 transform transition hover:-translate-y-0.5 active:scale-95 flex items-center justify-center gap-2"
+                        >
+                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                            </svg>
+                            게시글 등록하기
+                        </button>
+                    </form>
+
+                    {message && (
+                        <div className={`mx-8 mb-8 p-4 rounded-xl text-sm font-medium text-center flex items-center justify-center gap-2 ${
+                            isError 
+                            ? 'bg-red-50 text-red-600 border border-red-100' 
+                            : 'bg-green-50 text-green-600 border border-green-100'
+                        }`} role="alert">
+                            {isError ? (
+                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            ) : (
+                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                </svg>
+                            )}
+                            {message}
+                        </div>
+                    )}
+                </div>
             </div>
-        </main>
+        </div>
     );
 }
 
